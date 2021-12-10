@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a83902de773344f38940d1ad7b44be54" Name="Diagram1">
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Branch_type" Width="1.5" PointX="7.375" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Class" Width="1.5" PointX="7.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Grade" Width="1.5" PointX="2.375" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Lecturer" Width="1.5" PointX="4.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Session" Width="1.5" PointX="4.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Stipend" Width="1.5" PointX="0.5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Student" Width="1.5" PointX="0.5" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Subject" Width="1.5" PointX="2.375" PointY="8.375" IsExpanded="true" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Class_ToBranch" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToClass" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToLecturer" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToSubject" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToStudent" ManuallyRouted="false" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Stipend_ToStudent" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
