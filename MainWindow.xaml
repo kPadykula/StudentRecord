@@ -5,8 +5,136 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApk"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        
+        <!--Main Grid-->
+        <Grid x:Name="RootGrid" Background="#BAFFDF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition
+                Height="80"/>
+                <RowDefinition 
+                Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--TopGrid-->
+            <Border CornerRadius="0 0 10 0" BorderBrush="#7c7287" Background="#7c7287" BorderThickness="0 0 5 5" DockPanel.Dock="Bottom" >
+                <Grid x:Name="TopGrid" Background="#b2edc5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Column="1">
+                        <StackPanel Orientation="Horizontal" Width="300">
+                            <Label Name="UserInfoLabel" 
+                                   Content="Names"
+                                   Foreground="white"
+                                   VerticalAlignment="Center"
+                                   FontSize="18"
+                                   Margin="10"
+                                   HorizontalContentAlignment="Center"
+                                   VerticalContentAlignment="Center"
+                                   Height="60" Width="192"
+                                   />
+                            <Button x:Name="btn_Logout"
+                                    Click="btn_Logout_Click"
+                                    Foreground="White"
+                                    Background="#9dc0bc"
+                                    Content="Logout" 
+                                    Width="73" 
+                                    Height="41"/>
+                        </StackPanel>
+                    </TextBlock>
+                </Grid>
+            </Border>
+
+            <!--Center Grid-->
+            <Grid x:Name="MenuGrid" Grid.Row="1" Background="#BAFFDF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Left Stack Panel-->
+                <Border CornerRadius="0 0 10 0" BorderBrush="#7c7287" Background="#7c7287" BorderThickness="0 0 7 5" DockPanel.Dock="Bottom" >
+                    <StackPanel Grid.Column="0" Background="#9DC0BC">
+                        <Button x:Name="btn_Grades"
+                                Click="btn_Grades_Click"
+                                Content="Grades"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Students"
+                                Click="btn_Students_Click"
+                                Content="Students"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Lecturers"
+                                Click="btn_Lecturers_Click"
+                                Content="Lecturers"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Subjects"
+                                Click="btn_Subjects_Click"
+                                Content="Subjects"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Branch"
+                                Click="btn_Branch_Click"
+                                Content="Branch"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+                    </StackPanel>
+                </Border>
+                
+                <!--RIGHT Panel Parent-->
+                <Grid x:Name="RightCenterGridParent" Grid.Column="1" Visibility="Visible">
+                    
+                </Grid>
+
+                <!--RIGHT Panel Students-->
+                <Grid x:Name="RightCenterPanelGrades" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Grades" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="50"/>
+
+
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+
+
+
+
+
     </Grid>
+
 </Window>

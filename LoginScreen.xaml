@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DesktopApk"
         mc:Ignorable="d"
-        Title="Login" Height="320" Width="300" FontSize="14" Background="White">
+        WindowStartupLocation="CenterScreen"
+        Title="Login" Height="320" Width="300" FontSize="14" Background="#BAFFDF">
 
-    <Border Background="#2e3137" CornerRadius="20" Margin="20">
+    <Border Background="#7c7287" CornerRadius="20" Margin="20">
         <StackPanel Margin="20">
             <Label Content="Login" 
                            Foreground="White" 
@@ -17,17 +18,17 @@
             <Label Content="Username"
                             Foreground="White"/>
             <TextBox Name="txtUsername" 
-                            Background="#545d6a" 
-                            Foreground="White"
+                            Background="#b2edc5" 
+                            Foreground="Black"
                             FontSize="18"/>
             <Label Content="Password" Foreground="white"/>
             <PasswordBox Name="txtPassword"
-                            Background="#545d6a"
-                            Foreground="White"
+                            Background="#b2edc5"
+                            Foreground="Black"
                             FontSize="18"/>
             <Button Name="btnSubmit" 
                             Click="btnSubmitLogin_Click"
-                            Background="#545d6a"
+                            Background="#9dc0bc"
                             Foreground="White"
                             FontSize="18" 
                             Margin="20 10">

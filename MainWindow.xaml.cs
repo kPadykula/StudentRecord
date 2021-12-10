@@ -20,9 +20,47 @@ namespace DesktopApk
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int loginID = 0;
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public int LoginID { set { loginID = value; }  }
+
+        private void btn_Grades_Click(object sender, RoutedEventArgs e)
+        {
+            var panel = RightCenterGridParent;
+            panel.Visibility = Visibility.Hidden;
+
+            var mainPanel = RightCenterPanelGrades;
+            mainPanel.Visibility = Visibility.Visible;
+
+        }
+
+        private void btn_Logout_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Students_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Lecturers_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Subjects_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Branch_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
