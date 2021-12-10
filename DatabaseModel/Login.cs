@@ -12,32 +12,27 @@ namespace DesktopApk.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Login
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Student()
+        public Login()
         {
-            this.Grades = new HashSet<Grade>();
-            this.Sessions = new HashSet<Session>();
-            this.Stipends = new HashSet<Stipend>();
+            this.Admins = new HashSet<Admin>();
+            this.Lecturers = new HashSet<Lecturer>();
+            this.Students = new HashSet<Student>();
         }
     
-        public int Id_student { get; set; }
-        public string First_name { get; set; }
-        public string Last_name { get; set; }
-        public string Address { get; set; }
-        public System.DateTime Birth_date { get; set; }
-        public System.DateTime Entrance_date { get; set; }
-        public string Leaving_date { get; set; }
-        public Nullable<bool> Stipend { get; set; }
         public int Id_login { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public System.DateTime Created_date { get; set; }
+        public Nullable<System.DateTime> LastPassword_reset { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
-        public virtual Login Login { get; set; }
+        public virtual ICollection<Admin> Admins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Session> Sessions { get; set; }
+        public virtual ICollection<Lecturer> Lecturers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Stipend> Stipends { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

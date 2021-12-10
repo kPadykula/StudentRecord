@@ -12,22 +12,12 @@ namespace DesktopApk.DatabaseModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Lecturer
+    public partial class Admin
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Lecturer()
-        {
-            this.Grades = new HashSet<Grade>();
-        }
-    
-        public int Id_lecturer { get; set; }
-        public string First_name { get; set; }
-        public string Last_name { get; set; }
-        public string Address { get; set; }
+        public int Id_admin { get; set; }
+        public string Name { get; set; }
         public int Id_login { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
         public virtual Login Login { get; set; }
     }
 }
