@@ -35,5 +35,7 @@ namespace DesktopApk.DatabaseModel
         public virtual DbSet<Stipend> Stipends { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

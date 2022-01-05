@@ -25,6 +25,8 @@
         <AssociationConnector Association="SZRBDApplicationModel.FK_Student_ToLogin" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToStudent" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Stipend_ToStudent" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.C__RefactorLog" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

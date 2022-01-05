@@ -1,0 +1,61 @@
+﻿<Window x:Class="DesktopApk.WindowPages.AddNewStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopApk.WindowPages"
+        mc:Ignorable="d"
+        Title="AddNewStudent" Height="250" Width="300">
+    <Grid x:Name="AddNewStudentGrid" Background="#b2edc5">
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="FirstName"/>
+                <TextBox x:Name="FirstName"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="LastName" Margin="0,0,1,0"/>
+                
+                <TextBox x:Name="LastName"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Address" 
+                       Margin="0,0,11,0"
+                       HorizontalAlignment="Left"/>
+                <TextBox x:Name="Address"
+                         Width="151"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Birth Date" 
+                       Margin="0,0,50,0"/>
+
+                <DatePicker x:Name="BirthDate"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Entrance Date"
+                       Margin="0,0,29,0"/>
+                <DatePicker x:Name="EntranceDate" 
+                            HorizontalAlignment="Right"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center">
+                
+                <Button x:Name="btn_Submit"
+                        Content="Submit"
+                        Margin="0,10,0,0"
+                        Width="100"
+                        Click="SubmitButton"/>
+            </StackPanel>
+            
+        </WrapPanel>
+    </Grid>
+</Window>
