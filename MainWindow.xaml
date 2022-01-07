@@ -96,6 +96,30 @@
                                 Content="Branch"
                                 FontSize="18"
                                 Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Class"
+                                Click="btn_Class_Click"
+                                Content="Class"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Session"
+                                Click="btn_Session_Click"
+                                Content="Session"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Stipend"
+                                Click="btn_Stipend_Click"
+                                Content="Stipend"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
+
+                        <Button x:Name="btn_Grade"
+                                Click="btn_Grade_Click"
+                                Content="Grade"
+                                FontSize="18"
+                                Margin="0 10 0 0"/>
                     </StackPanel>
                 </Border>
 
@@ -103,7 +127,7 @@
                 <Grid x:Name="RightCenterGridParent" Grid.Column="1" Visibility="Visible"/>
 
                 <!--RIGHT Panel Students-->
-                <Grid x:Name="RightCenterPanelStudents" Grid.Column="1" Visibility="Visible" DataContext="{StaticResource studentViewSource}">
+                <Grid x:Name="RightCenterPanelStudents" Grid.Column="1" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -129,21 +153,21 @@
                               VerticalAlignment="Top" 
                               Width="191" Height="30"/>
 
-                    <Button x:Name="buttonDelete" Content="Delete" Grid.Column="3" Grid.Row="5"
+                    <Button x:Name="buttonDeleteStudent" Content="Delete" Grid.Column="3" Grid.Row="5"
                             Click="btn_Delete_Student_Click"
                             HorizontalAlignment="Left"
                             Margin="10,10,0,0" 
                             VerticalAlignment="Top" 
                             Width="190" Height="30"/>
 
-                    <Button x:Name="buttonEdit" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                    <Button x:Name="buttonEditStudent" Content="Edit" Grid.Column="2" Grid.Row="5" 
                             Click="btn_Edit_Student_Click"
                             HorizontalAlignment="Left"
                             Margin="10,10,0,0" 
                             VerticalAlignment="Top"
                             Width="190" Height="30"/>
 
-                    <Button x:Name="buttonAdd" Content="Add" Grid.Column="1" Grid.Row="5" 
+                    <Button x:Name="buttonAddStudent" Content="Add" Grid.Column="1" Grid.Row="5" 
                             Click="btn_Add_Student_Click"
                             HorizontalAlignment="Left" 
                             Margin="10,10,0,0" 
@@ -152,8 +176,7 @@
 
                     <DataGrid x:Name="studentDataGrid" AutoGenerateColumns="false" 
                               Grid.Row="1" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="4"
-                              EnableRowVirtualization="True" 
-                              ItemsSource="{Binding}" 
+                              EnableRowVirtualization="True"
                               Margin="20"
                               RowDetailsVisibilityMode="VisibleWhenSelected"
                               CanUserAddRows="False"
@@ -170,16 +193,434 @@
                             <DataGridTextColumn x:Name="birth_dateColumn" Binding="{Binding Birth_date, Mode=TwoWay, NotifyOnValidationError=true, StringFormat=d, ValidatesOnExceptions=true}" Header="Birth date"/>
                             <DataGridTextColumn x:Name="entrance_dateColumn" Binding="{Binding Entrance_date, Mode=TwoWay, NotifyOnValidationError=true, StringFormat=d, ValidatesOnExceptions=true}" Header="Entrance date"/>
                             <DataGridTextColumn x:Name="leaving_dateColumn" Binding="{Binding Leaving_date}" Header="Leaving date"/>
-                            <DataGridCheckBoxColumn x:Name="stipendColumn" Binding="{Binding Stipend}" Header="Stipend"/>
+                            <DataGridTextColumn x:Name="stipendColumn" Binding="{Binding Stipend}" Header="Stipend"/>
                             <DataGridTextColumn x:Name="id_loginColumn" Binding="{Binding Id_login}" Header="Id login"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="button" Content="Refresh" Grid.Column="2" 
+                    <Button x:Name="buttonRefreshStudent" Content="Refresh" Grid.Column="3" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
                             Width="190" Height="30"
                             Click="btn_Refresh_DataGrid"/>
 
+                </Grid>
+
+                <!--RIGHT Panel Lecturers-->
+                <Grid x:Name="RightCenterPanelLecturers" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteLecturers" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Lecturer_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditLecturers" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Lecturer_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddLecturers" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Lecturer_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+                    
+                    <Button x:Name="buttonRefreshLecturers" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Lecturers"/>
+
+                    <DataGrid x:Name="dataGridLecturers" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_lecturer}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding First_name}" Header="First Name"/>
+                            <DataGridTextColumn Binding="{Binding Last_name}" Header="Last Name"/>
+                            <DataGridTextColumn Binding="{Binding Address}" Header="Address"/>
+                            <DataGridTextColumn Binding="{Binding Id_login}" Header="ID Login"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!--RIGHT Panel Subjects-->
+                <Grid x:Name="RightCenterPanelSubjects" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteSubjects" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Subjects_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditSubjects" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Subjects_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddSubjects" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Subjects_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshSubjects" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Subjects"/>
+
+                    <DataGrid x:Name="dataGridSubjects" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_subject}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!--RIGHT Panel Branch-->
+                <Grid x:Name="RightCenterPanelBranch" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteBranch" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Branch_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditBranch" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Branch_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddBranch" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Branch_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshBranch" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Branch"/>
+
+                    <DataGrid x:Name="dataGridBranch" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_branch}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!--RIGHT Panel Class-->
+                <Grid x:Name="RightCenterPanelClass" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteClass" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Class_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditClass" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Class_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddClass" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Class_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshClass" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Class"/>
+
+                    <DataGrid x:Name="dataGridClass" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="false"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_class}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_branch}" Header="Branch ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                            <DataGridTextColumn Binding="{Binding Commencment_date}" Header="Commencment Date"/>
+                            <DataGridTextColumn Binding="{Binding End_date}" Header="End Date"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!--RIGHT Panel Session-->
+                <Grid x:Name="RightCenterPanelSession" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteSession" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Session_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditSession" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Session_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddSession" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Session_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshSession" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Session"/>
+
+                    <DataGrid x:Name="dataGridSession" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="false"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_session}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_student}" Header="Student ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_class}" Header="Class ID"/>
+                            <DataGridTextColumn Binding="{Binding Start_date}" Header="Start Date"/>
+                            <DataGridTextColumn Binding="{Binding End_date}" Header="End Date"/>
+                            <DataGridTextColumn Binding="{Binding Nr_session}" Header="Nr"/>
+                            <DataGridTextColumn Binding="{Binding Part_session}" Header="Part"/>
+                            <DataGridTextColumn Binding="{Binding Pass}" Header="Pass"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+                <!--RIGHT Panel Stipend-->
+                <Grid x:Name="RightCenterPanelStipend" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteStipend" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Stipend_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditStipend" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Stipend_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddStipend" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Stipend_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshStipend" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Stipend"/>
+
+                    <DataGrid x:Name="dataGridStipend" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="false"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_stipend}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_student}" Header="Student ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name"/>
+                            <DataGridTextColumn Binding="{Binding Start_date}" Header="Start Date"/>
+                            <DataGridTextColumn Binding="{Binding End_date}" Header="End Date"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                
+                <!--RIGHT Panel Grades-->
+                <Grid x:Name="RightCenterPanelGrades" Grid.Column="1" Visibility="Visible">
+                    <Grid.RowDefinitions>
+                        <RowDefinition MaxHeight="50"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition MaxHeight="50"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonDeleteGrades" Content="Delete" Grid.Column="3" Grid.Row="5"
+                            Click="btn_Delete_Grades_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top" 
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonEditGrades" Content="Edit" Grid.Column="2" Grid.Row="5" 
+                            Click="btn_Edit_Grades_Click"
+                            HorizontalAlignment="Left"
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="190" Height="30"/>
+
+                    <Button x:Name="buttonAddGrades" Content="Add" Grid.Column="1" Grid.Row="5" 
+                            Click="btn_Add_Grades_Click"
+                            HorizontalAlignment="Left" 
+                            Margin="10,10,0,0" 
+                            VerticalAlignment="Top"
+                            Width="191" Height="30"/>
+
+                    <Button x:Name="buttonRefreshGrades" Content="Refresh" Grid.Column="3" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Width="190" Height="30"
+                            Click="btn_Refresh_DataGrid_Grades"/>
+
+                    <DataGrid x:Name="dataGridGrades" Grid.Row="1" Grid.RowSpan="4" Grid.ColumnSpan="4"
+                              AutoGenerateColumns="false"
+                              CanUserAddRows="False"
+                              ColumnWidth="*"
+                              Margin="20"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id_grade}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_lecturer}" Header="Lecturer ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_subject}" Header="Subject ID"/>
+                            <DataGridTextColumn Binding="{Binding Id_student}" Header="Student ID"/>
+                            <DataGridTextColumn Binding="{Binding Grade1}" Header="Grade"/>
+                            <DataGridTextColumn Binding="{Binding Grade_date}" Header="Grade Date"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
 
 

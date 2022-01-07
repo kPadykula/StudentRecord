@@ -12,16 +12,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DesktopApk;
 
 namespace DesktopApk.WindowPages
 {
     /// <summary>
-    /// Interaction logic for AddNewStudent.xaml
+    /// Interaction logic for AddNewLecturer.xaml
     /// </summary>
-    public partial class AddNewStudent : Window
+    public partial class AddNewLecturer : Window
     {
-        public AddNewStudent()
+        public AddNewLecturer()
         {
             InitializeComponent();
         }
@@ -31,7 +30,7 @@ namespace DesktopApk.WindowPages
             try
             {
                 Random rm = new Random();
-                
+
                 using (var context = new DatabaseModel.SZRBDApplicationEntities())
                 {
                     var rand = rm.Next(100, 10000);
@@ -44,19 +43,18 @@ namespace DesktopApk.WindowPages
                     }
                     
 
-                    if (FirstName.Text.Length == 0 || LastName.Text.Length == 0 || Address.Text.Length == 0 || BirthDate.SelectedDate.HasValue == false || EntranceDate.SelectedDate.HasValue == false)
+                    if (FirstName.Text.Length == 0 || LastName.Text.Length == 0 || Address.Text.Length == 0)
                     {
                         MessageBox.Show("Complete all data");
-                    }else
+                    }
+                    else
                     {
-                        var student = context.Set<DatabaseModel.Student>();
-                        student.Add(new DatabaseModel.Student
+                        var lecturer = context.Set<DatabaseModel.Lecturer>();
+                        lecturer.Add(new DatabaseModel.Lecturer
                         {
                             First_name = FirstName.Text,
                             Last_name = LastName.Text,
                             Address = Address.Text,
-                            Birth_date = BirthDate.SelectedDate.Value,
-                            Entrance_date = EntranceDate.SelectedDate.Value,
                             Login = new DatabaseModel.Login
                             {
                                 Username = FirstName.Text + LastName.Text + rand,
@@ -64,12 +62,12 @@ namespace DesktopApk.WindowPages
                                 Created_date = DateTime.Now,
                                 LastPassword_reset = null
                             }
-
                         });
+
                         context.SaveChanges();
-                        MessageBox.Show("You create new Student");
+                        MessageBox.Show("You create new Lecturer");
                         this.Close();
-                    }           
+                    }
                 }
             }
             catch (DbEntityValidationException DBEntityException)
@@ -85,11 +83,10 @@ namespace DesktopApk.WindowPages
                     }
                 }
 
-                MessageBox.Show("Cannot create Student");
+                MessageBox.Show("Cannot create Lecturer");
                 this.Close();
             }
             
-
         }
     }
 }

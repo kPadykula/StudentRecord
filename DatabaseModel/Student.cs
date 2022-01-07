@@ -17,9 +17,9 @@ namespace DesktopApk.DatabaseModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Student()
         {
-            this.Grades = new HashSet<Grade>();
             this.Sessions = new HashSet<Session>();
             this.Stipends = new HashSet<Stipend>();
+            this.Grades = new HashSet<Grade>();
         }
     
         public int Id_student { get; set; }
@@ -28,16 +28,30 @@ namespace DesktopApk.DatabaseModel
         public string Address { get; set; }
         public System.DateTime Birth_date { get; set; }
         public System.DateTime Entrance_date { get; set; }
-        public string Leaving_date { get; set; }
+        public Nullable<System.DateTime> Leaving_date { get; set; }
         public Nullable<bool> Stipend { get; set; }
         public int Id_login { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Grade> Grades { get; set; }
         public virtual Login Login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Stipend> Stipends { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Grade> Grades { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Student sec = (Student)obj;
+                return (Id_student == sec.Id_student) && (First_name == sec.First_name) && (Last_name == sec.Last_name) && (Address == sec.Address) && (Birth_date == sec.Birth_date) && (Entrance_date == sec.Entrance_date) &&
+                    (Leaving_date == sec.Leaving_date) && (Stipend == sec.Stipend) && (Id_login == sec.Id_login);
+            }
+        }
     }
 }

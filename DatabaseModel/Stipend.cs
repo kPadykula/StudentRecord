@@ -14,12 +14,25 @@ namespace DesktopApk.DatabaseModel
     
     public partial class Stipend
     {
-        public int Id { get; set; }
+        public int Id_stipend { get; set; }
         public int Id_student { get; set; }
         public string Name { get; set; }
         public System.DateTime Start_date { get; set; }
         public Nullable<System.DateTime> End_date { get; set; }
     
         public virtual Student Student { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Stipend sec = (Stipend)obj;
+                return (Id_stipend == sec.Id_stipend) && (Name == sec.Name) && (Id_student == sec.Id_student) && (Start_date == sec.Start_date) && (End_date == sec.End_date);
+            }
+        }
     }
 }

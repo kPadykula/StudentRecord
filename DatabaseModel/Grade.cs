@@ -18,11 +18,24 @@ namespace DesktopApk.DatabaseModel
         public int Id_lecturer { get; set; }
         public int Id_subject { get; set; }
         public int Id_student { get; set; }
-        public int Grade_date { get; set; }
+        public System.DateTime Grade_date { get; set; }
         public int Grade1 { get; set; }
     
         public virtual Lecturer Lecturer { get; set; }
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Grade sec = (Grade)obj;
+                return (Id_grade == sec.Id_grade) && (Id_lecturer == sec.Id_lecturer) && (Id_subject == sec.Id_subject) && (Id_student == sec.Id_student) && (Grade_date == sec.Grade_date) && (Grade1 == sec.Grade1);
+            }
+        }
     }
 }

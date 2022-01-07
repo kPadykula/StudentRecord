@@ -25,5 +25,17 @@ namespace DesktopApk.DatabaseModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Class> Classes { get; set; }
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Branch_type sec = (Branch_type)obj;
+                return (Id_branch == sec.Id_branch) && (Name == sec.Name);
+            }
+        }
     }
 }

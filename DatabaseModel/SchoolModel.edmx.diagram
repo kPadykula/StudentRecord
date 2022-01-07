@@ -8,25 +8,25 @@
         <EntityTypeShape EntityType="SZRBDApplicationModel.Admin" Width="1.5" PointX="3" PointY="4.625" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Branch_type" Width="1.5" PointX="0.75" PointY="4.25" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Class" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="SZRBDApplicationModel.Grade" Width="1.5" PointX="8.25" PointY="9.125" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Lecturer" Width="1.5" PointX="3" PointY="11.5" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Login" Width="1.5" PointX="0.75" PointY="8" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Session" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="SZRBDApplicationModel.Stipend" Width="1.5" PointX="5.25" PointY="11.5" />
-        <EntityTypeShape EntityType="SZRBDApplicationModel.Student" Width="1.5" PointX="3" PointY="7.125" />
         <EntityTypeShape EntityType="SZRBDApplicationModel.Subject" Width="1.5" PointX="6" PointY="4.75" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Admin_ToLogin" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Class_ToBranch" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToClass" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Lecturer_ToLogin" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.C__RefactorLog" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Student" Width="1.5" PointX="3.125" PointY="7.75" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Student_ToLogin" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToStudent" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Stipend" Width="1.5" PointX="5.375" PointY="11.375" />
+        <AssociationConnector Association="SZRBDApplicationModel.FK_Stipend_ToStudent" />
+        <EntityTypeShape EntityType="SZRBDApplicationModel.Grade" Width="1.5" PointX="8.25" PointY="7.875" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToLecturer" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToStudent" />
         <AssociationConnector Association="SZRBDApplicationModel.FK_Grade_ToSubject" />
-        <AssociationConnector Association="SZRBDApplicationModel.FK_Lecturer_ToLogin" />
-        <AssociationConnector Association="SZRBDApplicationModel.FK_Student_ToLogin" />
-        <AssociationConnector Association="SZRBDApplicationModel.FK_Session_ToStudent" />
-        <AssociationConnector Association="SZRBDApplicationModel.FK_Stipend_ToStudent" />
-        <EntityTypeShape EntityType="SZRBDApplicationModel.C__RefactorLog" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SZRBDApplicationModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

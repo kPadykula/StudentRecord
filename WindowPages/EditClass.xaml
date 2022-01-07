@@ -1,4 +1,4 @@
-﻿<Window x:Class="DesktopApk.WindowPages.AddNewStudent"
+﻿<Window x:Class="DesktopApk.WindowPages.EditClass"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,57 +6,57 @@
         xmlns:local="clr-namespace:DesktopApk.WindowPages"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AddNewStudent" Height="250" Width="300">
-    <Grid x:Name="AddNewStudentGrid" Background="#b2edc5">
+        Loaded="Window_Loaded"
+        Title="EditClass"  Height="220" Width="400">
+    <Grid x:Name="AddNewClassGrid" Background="#b2edc5">
         <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-            
-            <StackPanel Orientation="Horizontal">
-                <Label Content="FirstName"/>
-                <TextBox x:Name="FirstName"
-                           TextWrapping="Wrap"
-                           Width="151"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <Label Content="LastName" Margin="0,0,1,0"/>
-                
-                <TextBox x:Name="LastName"
-                           TextWrapping="Wrap"
-                           Width="151"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Address" 
-                       Margin="0,0,11,0"
-                       HorizontalAlignment="Left"/>
-                <TextBox x:Name="Address"
-                         Width="151"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Birth Date" 
-                       Margin="0,0,50,0"/>
 
-                <DatePicker x:Name="BirthDate"/>
-            </StackPanel>
-            
             <StackPanel Orientation="Horizontal">
-                <Label Content="Entrance Date"
-                       Margin="0,0,29,0"/>
-                <DatePicker x:Name="EntranceDate" 
+                <Label Content="Name"
+                       Margin="0,0,90,0"/>
+
+                <TextBox x:Name="ClassNameNew"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commencment Date"
+                       Margin="0,0,13,0"/>
+
+                <DatePicker x:Name="CommencmentDateNew"
+                            Width="151"
                             HorizontalAlignment="Right"/>
             </StackPanel>
-            
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="End Date" 
+                       Margin="0,0,74,0"
+                       HorizontalAlignment="Left"/>
+                <DatePicker x:Name="EndDateNew"
+                            Width="151"
+                            HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Branch" 
+                       Margin="0,0,86,0"
+                       HorizontalAlignment="Left"/>
+                <ComboBox x:Name="BranchTypeNew"
+                            Width="151"
+                            HorizontalAlignment="Right"/>
+            </StackPanel>
+
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Center">
-                
+
                 <Button x:Name="btn_Submit"
                         Content="Submit"
                         Margin="0,10,0,0"
                         Width="100"
-                        Click="SubmitButton"/>
+                        Click="SubmitButtonEdit"/>
             </StackPanel>
-            
+
         </WrapPanel>
     </Grid>
 </Window>
