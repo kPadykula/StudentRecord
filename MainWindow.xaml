@@ -31,7 +31,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
-
+                        
                     </Grid.ColumnDefinitions>
 
 
@@ -124,7 +124,11 @@
                 </Border>
 
                 <!--RIGHT Panel Parent-->
-                <Grid x:Name="RightCenterGridParent" Grid.Column="1" Visibility="Visible"/>
+                <Grid x:Name="RightCenterGridParent" Grid.Column="1" Visibility="Visible">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
+                </Grid>
 
                 <!--RIGHT Panel Students-->
                 <Grid x:Name="RightCenterPanelStudents" Grid.Column="1" Visibility="Collapsed">
@@ -144,11 +148,14 @@
                     </Grid.ColumnDefinitions>
                     <ComboBox x:Name="comboBoxSelectBranch" Grid.Column="0" Grid.Row="0"
                               HorizontalAlignment="Left"
+                              Visibility="Collapsed"
+                              SelectionChanged="comboBoxSelectBranch_SelectionChanged"
                               Margin="10,10,0,0" 
                               VerticalAlignment="Top" 
                               Width="191" Height="30"/>
-                    <ComboBox x:Name="comboBoxSelectSemester" Grid.Column="1" Grid.Row="0"
-                              HorizontalAlignment="Left" 
+                    <TextBox  Grid.Column="2" Grid.Row="0"
+                              TextChanged="TextBoxSearch_TextChanged"
+                              HorizontalAlignment="Center" 
                               Margin="10,10,0,0"
                               VerticalAlignment="Top" 
                               Width="191" Height="30"/>
@@ -563,7 +570,7 @@
                 </Grid>
                 
                 <!--RIGHT Panel Grades-->
-                <Grid x:Name="RightCenterPanelGrades" Grid.Column="1" Visibility="Visible">
+                <Grid x:Name="RightCenterPanelGrades" Grid.Column="1" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>

@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Data;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Media;
 
 namespace DesktopApk
 {
@@ -300,20 +302,39 @@ namespace DesktopApk
         public void ComboBoxDataBindingBranch()
         {
             var itemBox = comboBoxSelectBranch;
-            List<DatabaseModel.Branch_type> list = new List<DatabaseModel.Branch_type>();
-            
+
             using (var context = new DatabaseModel.SZRBDApplicationEntities())
             {
-                foreach (var item in context.Branch_type)
-                {
-                    list.Add(item);
-                }
-                itemBox.ItemsSource = list;
+                itemBox.ItemsSource = context.Branch_type.ToList();
                 itemBox.SelectedValuePath = "Id_branch";
                 itemBox.DisplayMemberPath = "Name";
             }
-        }
 
+
+        }
+        private void comboBoxSelectBranch_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        } 
+
+        private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var tbx = sender as TextBox;
+
+            if (tbx.Text != "")
+            {
+                List<DatabaseModel.Student> filteredList;
+                using (var context = new DatabaseModel.SZRBDApplicationEntities())
+                {
+                    filteredList = context.Students.Where(x => 
+                    (x.First_name.ToLower() + " " + x.Last_name.ToLower() + " " + x.Address.ToLower()
+                    ).Contains(tbx.Text.ToLower())).ToList();
+                }
+                studentDataGrid.ItemsSource = null;
+                studentDataGrid.ItemsSource = filteredList;
+            }
+            else { studentDataGrid.ItemsSource = myStudents; }
+        }
         private void loadDataGridStudents()
         {
 
@@ -1079,5 +1100,7 @@ namespace DesktopApk
             }
             dataGridGrades.ItemsSource = myGrades;
         }
+
+        
     }
 }
