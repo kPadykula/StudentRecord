@@ -29,5 +29,17 @@ namespace DesktopApk.DatabaseModel
         public virtual Branch_type Branch_type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Session> Sessions { get; set; }
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Class sec = (Class)obj;
+                return (Id_class == sec.Id_class) && (Name == sec.Name) && (Id_branch == sec.Id_branch) && (Commencment_date == sec.Commencment_date) && (End_date == sec.End_date);
+            }
+        }
     }
 }

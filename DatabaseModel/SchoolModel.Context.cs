@@ -28,12 +28,14 @@ namespace DesktopApk.DatabaseModel
         public virtual DbSet<Admin> Admins { get; set; }
         public virtual DbSet<Branch_type> Branch_type { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
-        public virtual DbSet<Grade> Grades { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
         public virtual DbSet<Login> Logins { get; set; }
         public virtual DbSet<Session> Sessions { get; set; }
-        public virtual DbSet<Stipend> Stipends { get; set; }
-        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Stipend> Stipends { get; set; }
+        public virtual DbSet<Grade> Grades { get; set; }
     }
 }

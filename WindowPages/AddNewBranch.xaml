@@ -1,0 +1,32 @@
+﻿<Window x:Class="DesktopApk.WindowPages.AddNewBranch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopApk.WindowPages"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="AddNewBranch" Height="200" Width="300">
+    <Grid x:Name="AddNewBranchGrid" Background="#b2edc5">
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name"/>
+                <TextBox x:Name="branchName"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center">
+
+                <Button x:Name="btn_Submit"
+                        Content="Submit"
+                        Margin="0,10,0,0"
+                        Width="100"
+                        Click="SubmitButton"/>
+            </StackPanel>
+
+        </WrapPanel>
+    </Grid>
+</Window>

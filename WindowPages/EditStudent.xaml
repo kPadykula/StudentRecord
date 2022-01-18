@@ -1,0 +1,78 @@
+﻿<Window x:Class="DesktopApk.WindowPages.EditStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopApk.WindowPages"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="EditStudent" Height="300" Width="350">
+    <Grid x:Name="EditStudentGrid" Background="#b2edc5">
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="FirstName"/>
+                <TextBox x:Name="FirstNameEdit"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="LastName" Margin="0,0,1,0"/>
+
+                <TextBox x:Name="LastNameEdit"
+                           TextWrapping="Wrap"
+                           Width="151"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Address" 
+                       Margin="0,0,11,0"
+                       HorizontalAlignment="Left"/>
+                <TextBox x:Name="AddressEdit"
+                         Width="151"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Birth Date" 
+                       Margin="0,0,50,0"/>
+
+                <DatePicker x:Name="BirthDateEdit"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Entrance Date"
+                       Margin="0,0,29,0"/>
+                <DatePicker x:Name="EntranceDateEdit" 
+                            HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Leaving Date"
+                       Margin="0,0,34,0"/>
+                <DatePicker x:Name="LeavingDateEdit" 
+                            HorizontalAlignment="Right"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Stipend"
+                       Margin="0,0,115,0"/>
+                <ComboBox x:Name="ComboboxStipendEdit" Width="50">
+                    <ComboBoxItem Content="Yes" DataContext="1"/>
+                    <ComboBoxItem Content="No" DataContext="0"/>
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Center">
+
+                <Button x:Name="btn_SubmitEdit"
+                        Content="Submit"
+                        Margin="0,10,0,0"
+                        Width="100"
+                        Click="SubmitButtonEdit"/>
+            </StackPanel>
+
+        </WrapPanel>
+    </Grid>
+</Window>

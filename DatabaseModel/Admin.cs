@@ -19,5 +19,18 @@ namespace DesktopApk.DatabaseModel
         public int Id_login { get; set; }
     
         public virtual Login Login { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Admin sec = (Admin)obj;
+                return (Id_admin == sec.Id_admin) && (Name == sec.Name) && (Id_login == sec.Id_login);
+            }
+        }
     }
 }

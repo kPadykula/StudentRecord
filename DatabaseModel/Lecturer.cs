@@ -26,8 +26,21 @@ namespace DesktopApk.DatabaseModel
         public string Address { get; set; }
         public int Id_login { get; set; }
     
+        public virtual Login Login { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grades { get; set; }
-        public virtual Login Login { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Lecturer sec = (Lecturer)obj;
+                return (Id_lecturer == sec.Id_lecturer) && (First_name == sec.First_name) && (Id_login == sec.Id_login) && (Last_name == sec.Last_name) && (Address == sec.Address);
+            }
+        }
     }
 }

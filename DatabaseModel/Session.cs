@@ -25,5 +25,20 @@ namespace DesktopApk.DatabaseModel
     
         public virtual Class Class { get; set; }
         public virtual Student Student { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Session sec = (Session)obj;
+                return (Id_session == sec.Id_session) && (Id_student == sec.Id_student) && (Id_class == sec.Id_class) &&
+                    (Start_date == sec.Start_date) && (End_date == sec.End_date) && (Nr_session == sec.Nr_session) &&
+                    (Part_session == sec.Part_session) && (Pass == sec.Pass);
+            }
+        }
     }
 }

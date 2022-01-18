@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\kakip\Desktop\Bazydanych\GitApk\StudentRecord\DatabaseModel\SchoolModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\kakip\Desktop\SqL\Szkoła\Projektowanie Aplikacji Bazodanowych\Ćwiczenia - Rafał Wojszczyk\StudentRecord\DatabaseModel\SchoolModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

@@ -4,7 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SZRBDApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SZRBDApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Id_admin" />
@@ -38,7 +44,7 @@
           <Property Name="Id_lecturer" Type="int" Nullable="false" />
           <Property Name="Id_subject" Type="int" Nullable="false" />
           <Property Name="Id_student" Type="int" Nullable="false" />
-          <Property Name="Grade_date" Type="int" Nullable="false" />
+          <Property Name="Grade_date" Type="date" Nullable="false" />
           <Property Name="Grade" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Lecturer">
@@ -56,8 +62,8 @@
             <PropertyRef Name="Id_login" />
           </Key>
           <Property Name="Id_login" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="Created_date" Type="datetime" Nullable="false" />
           <Property Name="LastPassword_reset" Type="datetime" />
         </EntityType>
@@ -76,9 +82,9 @@
         </EntityType>
         <EntityType Name="Stipend">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="Id_stipend" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_stipend" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_student" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Start_date" Type="date" Nullable="false" />
@@ -88,13 +94,13 @@
           <Key>
             <PropertyRef Name="Id_student" />
           </Key>
-          <Property Name="Id_student" Type="int" Nullable="false" />
+          <Property Name="Id_student" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Last_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Birth_date" Type="date" Nullable="false" />
           <Property Name="Entrance_date" Type="date" Nullable="false" />
-          <Property Name="Leaving_date" Type="nchar" MaxLength="10" />
+          <Property Name="Leaving_date" Type="date" />
           <Property Name="Stipend" Type="bit" />
           <Property Name="Id_login" Type="int" Nullable="false" />
         </EntityType>
@@ -104,6 +110,16 @@
           </Key>
           <Property Name="Id_subject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Admin_ToLogin">
           <End Role="Login" Type="Self.Login" Multiplicity="1" />
@@ -226,6 +242,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="SZRBDApplicationModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branch_type" EntityType="Self.Branch_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
@@ -236,6 +253,7 @@
           <EntitySet Name="Stipend" EntityType="Self.Stipend" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Admin_ToLogin" Association="Self.FK_Admin_ToLogin">
             <End Role="Login" EntitySet="Login" />
             <End Role="Admin" EntitySet="Admin" />
@@ -285,12 +303,9 @@
           <EntitySet Name="Admins" EntityType="SZRBDApplicationModel.Admin" />
           <EntitySet Name="Branch_type" EntityType="SZRBDApplicationModel.Branch_type" />
           <EntitySet Name="Classes" EntityType="SZRBDApplicationModel.Class" />
-          <EntitySet Name="Grades" EntityType="SZRBDApplicationModel.Grade" />
           <EntitySet Name="Lecturers" EntityType="SZRBDApplicationModel.Lecturer" />
           <EntitySet Name="Logins" EntityType="SZRBDApplicationModel.Login" />
           <EntitySet Name="Sessions" EntityType="SZRBDApplicationModel.Session" />
-          <EntitySet Name="Stipends" EntityType="SZRBDApplicationModel.Stipend" />
-          <EntitySet Name="Students" EntityType="SZRBDApplicationModel.Student" />
           <EntitySet Name="Subjects" EntityType="SZRBDApplicationModel.Subject" />
           <AssociationSet Name="FK_Admin_ToLogin" Association="SZRBDApplicationModel.FK_Admin_ToLogin">
             <End Role="Login" EntitySet="Logins" />
@@ -304,6 +319,27 @@
             <End Role="Class" EntitySet="Classes" />
             <End Role="Session" EntitySet="Sessions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Lecturer_ToLogin" Association="SZRBDApplicationModel.FK_Lecturer_ToLogin">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Lecturer" EntitySet="Lecturers" />
+          </AssociationSet>
+          <EntitySet Name="C__RefactorLog" EntityType="SZRBDApplicationModel.C__RefactorLog" />
+          <EntitySet Name="sysdiagrams" EntityType="SZRBDApplicationModel.sysdiagram" />
+          <EntitySet Name="Students" EntityType="SZRBDApplicationModel.Student" />
+          <AssociationSet Name="FK_Student_ToLogin" Association="SZRBDApplicationModel.FK_Student_ToLogin">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_ToStudent" Association="SZRBDApplicationModel.FK_Session_ToStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <EntitySet Name="Stipends" EntityType="SZRBDApplicationModel.Stipend" />
+          <AssociationSet Name="FK_Stipend_ToStudent" Association="SZRBDApplicationModel.FK_Stipend_ToStudent">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Stipend" EntitySet="Stipends" />
+          </AssociationSet>
+          <EntitySet Name="Grades" EntityType="SZRBDApplicationModel.Grade" />
           <AssociationSet Name="FK_Grade_ToLecturer" Association="SZRBDApplicationModel.FK_Grade_ToLecturer">
             <End Role="Lecturer" EntitySet="Lecturers" />
             <End Role="Grade" EntitySet="Grades" />
@@ -315,22 +351,6 @@
           <AssociationSet Name="FK_Grade_ToSubject" Association="SZRBDApplicationModel.FK_Grade_ToSubject">
             <End Role="Subject" EntitySet="Subjects" />
             <End Role="Grade" EntitySet="Grades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Lecturer_ToLogin" Association="SZRBDApplicationModel.FK_Lecturer_ToLogin">
-            <End Role="Login" EntitySet="Logins" />
-            <End Role="Lecturer" EntitySet="Lecturers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Student_ToLogin" Association="SZRBDApplicationModel.FK_Student_ToLogin">
-            <End Role="Login" EntitySet="Logins" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Session_ToStudent" Association="SZRBDApplicationModel.FK_Session_ToStudent">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Session" EntitySet="Sessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stipend_ToStudent" Association="SZRBDApplicationModel.FK_Stipend_ToStudent">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Stipend" EntitySet="Stipends" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Admin">
@@ -362,20 +382,6 @@
           <NavigationProperty Name="Branch_type" Relationship="SZRBDApplicationModel.FK_Class_ToBranch" FromRole="Class" ToRole="Branch_type" />
           <NavigationProperty Name="Sessions" Relationship="SZRBDApplicationModel.FK_Session_ToClass" FromRole="Class" ToRole="Session" />
         </EntityType>
-        <EntityType Name="Grade">
-          <Key>
-            <PropertyRef Name="Id_grade" />
-          </Key>
-          <Property Name="Id_grade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_lecturer" Type="Int32" Nullable="false" />
-          <Property Name="Id_subject" Type="Int32" Nullable="false" />
-          <Property Name="Id_student" Type="Int32" Nullable="false" />
-          <Property Name="Grade_date" Type="Int32" Nullable="false" />
-          <Property Name="Grade1" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Lecturer" Relationship="SZRBDApplicationModel.FK_Grade_ToLecturer" FromRole="Grade" ToRole="Lecturer" />
-          <NavigationProperty Name="Student" Relationship="SZRBDApplicationModel.FK_Grade_ToStudent" FromRole="Grade" ToRole="Student" />
-          <NavigationProperty Name="Subject" Relationship="SZRBDApplicationModel.FK_Grade_ToSubject" FromRole="Grade" ToRole="Subject" />
-        </EntityType>
         <EntityType Name="Lecturer">
           <Key>
             <PropertyRef Name="Id_lecturer" />
@@ -385,16 +391,16 @@
           <Property Name="Last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id_login" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Grades" Relationship="SZRBDApplicationModel.FK_Grade_ToLecturer" FromRole="Lecturer" ToRole="Grade" />
           <NavigationProperty Name="Login" Relationship="SZRBDApplicationModel.FK_Lecturer_ToLogin" FromRole="Lecturer" ToRole="Login" />
+          <NavigationProperty Name="Grades" Relationship="SZRBDApplicationModel.FK_Grade_ToLecturer" FromRole="Lecturer" ToRole="Grade" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="Id_login" />
           </Key>
           <Property Name="Id_login" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Created_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastPassword_reset" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Admins" Relationship="SZRBDApplicationModel.FK_Admin_ToLogin" FromRole="Login" ToRole="Admin" />
@@ -415,35 +421,6 @@
           <Property Name="Pass" Type="Boolean" />
           <NavigationProperty Name="Class" Relationship="SZRBDApplicationModel.FK_Session_ToClass" FromRole="Session" ToRole="Class" />
           <NavigationProperty Name="Student" Relationship="SZRBDApplicationModel.FK_Session_ToStudent" FromRole="Session" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Stipend">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Id_student" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="End_date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Student" Relationship="SZRBDApplicationModel.FK_Stipend_ToStudent" FromRole="Stipend" ToRole="Student" />
-        </EntityType>
-        <EntityType Name="Student">
-          <Key>
-            <PropertyRef Name="Id_student" />
-          </Key>
-          <Property Name="Id_student" Type="Int32" Nullable="false" />
-          <Property Name="First_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Entrance_date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Leaving_date" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Stipend" Type="Boolean" />
-          <Property Name="Id_login" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Grades" Relationship="SZRBDApplicationModel.FK_Grade_ToStudent" FromRole="Student" ToRole="Grade" />
-          <NavigationProperty Name="Login" Relationship="SZRBDApplicationModel.FK_Student_ToLogin" FromRole="Student" ToRole="Login" />
-          <NavigationProperty Name="Sessions" Relationship="SZRBDApplicationModel.FK_Session_ToStudent" FromRole="Student" ToRole="Session" />
-          <NavigationProperty Name="Stipends" Relationship="SZRBDApplicationModel.FK_Stipend_ToStudent" FromRole="Student" ToRole="Stipend" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -489,6 +466,113 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Lecturer_ToLogin">
+          <End Type="SZRBDApplicationModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="SZRBDApplicationModel.Lecturer" Role="Lecturer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Id_login" />
+            </Principal>
+            <Dependent Role="Lecturer">
+              <PropertyRef Name="Id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id_student" />
+          </Key>
+          <Property Name="Id_student" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Birth_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Entrance_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Leaving_date" Type="DateTime" Precision="0" />
+          <Property Name="Stipend" Type="Boolean" />
+          <Property Name="Id_login" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login" Relationship="SZRBDApplicationModel.FK_Student_ToLogin" FromRole="Student" ToRole="Login" />
+          <NavigationProperty Name="Sessions" Relationship="SZRBDApplicationModel.FK_Session_ToStudent" FromRole="Student" ToRole="Session" />
+          <NavigationProperty Name="Stipends" Relationship="SZRBDApplicationModel.FK_Stipend_ToStudent" FromRole="Student" ToRole="Stipend" />
+          <NavigationProperty Name="Grades" Relationship="SZRBDApplicationModel.FK_Grade_ToStudent" FromRole="Student" ToRole="Grade" />
+        </EntityType>
+        <Association Name="FK_Student_ToLogin">
+          <End Type="SZRBDApplicationModel.Login" Role="Login" Multiplicity="1" />
+          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Id_login" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="Id_login" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_ToStudent">
+          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SZRBDApplicationModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id_student" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Stipend">
+          <Key>
+            <PropertyRef Name="Id_stipend" />
+          </Key>
+          <Property Name="Id_stipend" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_student" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="End_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Student" Relationship="SZRBDApplicationModel.FK_Stipend_ToStudent" FromRole="Stipend" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_Stipend_ToStudent">
+          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="SZRBDApplicationModel.Stipend" Role="Stipend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id_student" />
+            </Principal>
+            <Dependent Role="Stipend">
+              <PropertyRef Name="Id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id_grade" />
+          </Key>
+          <Property Name="Id_grade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_lecturer" Type="Int32" Nullable="false" />
+          <Property Name="Id_subject" Type="Int32" Nullable="false" />
+          <Property Name="Id_student" Type="Int32" Nullable="false" />
+          <Property Name="Grade_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Grade1" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lecturer" Relationship="SZRBDApplicationModel.FK_Grade_ToLecturer" FromRole="Grade" ToRole="Lecturer" />
+          <NavigationProperty Name="Student" Relationship="SZRBDApplicationModel.FK_Grade_ToStudent" FromRole="Grade" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="SZRBDApplicationModel.FK_Grade_ToSubject" FromRole="Grade" ToRole="Subject" />
+        </EntityType>
         <Association Name="FK_Grade_ToLecturer">
           <End Type="SZRBDApplicationModel.Lecturer" Role="Lecturer" Multiplicity="1" />
           <End Type="SZRBDApplicationModel.Grade" Role="Grade" Multiplicity="*" />
@@ -525,54 +609,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Lecturer_ToLogin">
-          <End Type="SZRBDApplicationModel.Login" Role="Login" Multiplicity="1" />
-          <End Type="SZRBDApplicationModel.Lecturer" Role="Lecturer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login">
-              <PropertyRef Name="Id_login" />
-            </Principal>
-            <Dependent Role="Lecturer">
-              <PropertyRef Name="Id_login" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Student_ToLogin">
-          <End Type="SZRBDApplicationModel.Login" Role="Login" Multiplicity="1" />
-          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login">
-              <PropertyRef Name="Id_login" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="Id_login" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Session_ToStudent">
-          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="SZRBDApplicationModel.Session" Role="Session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id_student" />
-            </Principal>
-            <Dependent Role="Session">
-              <PropertyRef Name="Id_student" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Stipend_ToStudent">
-          <End Type="SZRBDApplicationModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="SZRBDApplicationModel.Stipend" Role="Stipend" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id_student" />
-            </Principal>
-            <Dependent Role="Stipend">
-              <PropertyRef Name="Id_student" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -604,18 +640,6 @@
                 <ScalarProperty Name="Commencment_date" ColumnName="Commencment_date" />
                 <ScalarProperty Name="Id_branch" ColumnName="Id_branch" />
                 <ScalarProperty Name="Id_class" ColumnName="Id_class" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Grades">
-            <EntityTypeMapping TypeName="SZRBDApplicationModel.Grade">
-              <MappingFragment StoreEntitySet="Grade">
-                <ScalarProperty Name="Grade1" ColumnName="Grade" />
-                <ScalarProperty Name="Grade_date" ColumnName="Grade_date" />
-                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
-                <ScalarProperty Name="Id_subject" ColumnName="Id_subject" />
-                <ScalarProperty Name="Id_lecturer" ColumnName="Id_lecturer" />
-                <ScalarProperty Name="Id_grade" ColumnName="Id_grade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -655,14 +679,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Stipends">
-            <EntityTypeMapping TypeName="SZRBDApplicationModel.Stipend">
-              <MappingFragment StoreEntitySet="Stipend">
-                <ScalarProperty Name="End_date" ColumnName="End_date" />
-                <ScalarProperty Name="Start_date" ColumnName="Start_date" />
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="SZRBDApplicationModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_subject" ColumnName="Id_subject" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="SZRBDApplicationModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SZRBDApplicationModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -681,11 +720,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Subjects">
-            <EntityTypeMapping TypeName="SZRBDApplicationModel.Subject">
-              <MappingFragment StoreEntitySet="Subject">
+          <EntitySetMapping Name="Stipends">
+            <EntityTypeMapping TypeName="SZRBDApplicationModel.Stipend">
+              <MappingFragment StoreEntitySet="Stipend">
+                <ScalarProperty Name="End_date" ColumnName="End_date" />
+                <ScalarProperty Name="Start_date" ColumnName="Start_date" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
+                <ScalarProperty Name="Id_stipend" ColumnName="Id_stipend" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="SZRBDApplicationModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+                <ScalarProperty Name="Grade_date" ColumnName="Grade_date" />
+                <ScalarProperty Name="Id_student" ColumnName="Id_student" />
                 <ScalarProperty Name="Id_subject" ColumnName="Id_subject" />
+                <ScalarProperty Name="Id_lecturer" ColumnName="Id_lecturer" />
+                <ScalarProperty Name="Id_grade" ColumnName="Id_grade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
