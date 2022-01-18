@@ -5,10 +5,6 @@ using System.Linq;
 using System;
 using System.Windows.Controls;
 using System.Data;
-using System.Windows.Data;
-using System.ComponentModel;
-using System.Globalization;
-using System.Windows.Media;
 
 namespace DesktopApk
 {
@@ -17,6 +13,7 @@ namespace DesktopApk
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Init Variables
         private int loginID = 0;
         private List<DatabaseModel.Student> myStudents { get; set; }
         private List<DatabaseModel.Lecturer> myLecturers { get; set; }
@@ -27,12 +24,31 @@ namespace DesktopApk
         private List<DatabaseModel.Grade> myGrades { get; set; }
 
         private List<DatabaseModel.Stipend> myStipend { get; set; }
+
+        public int LoginID { set { loginID = value; } }
+        #endregion
+
+
         public MainWindow()
         {
             InitializeComponent(); 
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            setUserNameOnTop();
+        }
 
-        public int LoginID { set { loginID = value; }  }
+        private void setUserNameOnTop()
+        {
+            using (var context = new DatabaseModel.SZRBDApplicationEntities())
+            {
+                var user = context.Admins.FirstOrDefault(Admin => Admin.Id_login == loginID);
+                UserInfoLabel.Content = $"Welcome {user.Name}";
+            }
+        }
+
+
+        #region CentralButtons and Right Panel Visibility
 
         private void btn_Logout_Click(object sender, RoutedEventArgs e)
         {
@@ -71,7 +87,6 @@ namespace DesktopApk
             var mainPanel = RightCenterPanelStudents;
             mainPanel.Visibility = Visibility.Visible;
 
-            ComboBoxDataBindingBranch();
             loadDataGridStudents();
         }
 
@@ -299,24 +314,9 @@ namespace DesktopApk
 
             loadDataGridGrade();
         }
-        public void ComboBoxDataBindingBranch()
-        {
-            var itemBox = comboBoxSelectBranch;
+        #endregion
 
-            using (var context = new DatabaseModel.SZRBDApplicationEntities())
-            {
-                itemBox.ItemsSource = context.Branch_type.ToList();
-                itemBox.SelectedValuePath = "Id_branch";
-                itemBox.DisplayMemberPath = "Name";
-            }
-
-
-        }
-        private void comboBoxSelectBranch_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        } 
-
+        #region Students Right Panel Controls
         private void TextBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             var tbx = sender as TextBox;
@@ -425,26 +425,16 @@ namespace DesktopApk
                 MessageBox.Show($"Cannot delete Studnet {error.Message}");
             }
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            setUserNameOnTop();
-        }
-
-        private void setUserNameOnTop()
-        {
-            using(var context = new DatabaseModel.SZRBDApplicationEntities())
-            {
-                var user = context.Admins.FirstOrDefault(Admin => Admin.Id_login == loginID);
-                UserInfoLabel.Content = $"Welcome {user.Name}";
-            }
-        }
+        
+        
 
         private void btn_Refresh_DataGrid(object sender, RoutedEventArgs e)
         {
             loadDataGridStudents();
         }
+        #endregion
 
+        #region Lecturers Right Panel Controls
         private void btn_Refresh_DataGrid_Lecturers(object sender, RoutedEventArgs e)
         {
             loadDataGridLecturers();
@@ -541,7 +531,9 @@ namespace DesktopApk
 
             dataGridLecturers.ItemsSource = myLecturers;
         }
+        #endregion
 
+        #region Subject Right Panel Controls
         private void LoadDataGridSubjects()
         {
             using (var context = new DatabaseModel.SZRBDApplicationEntities())
@@ -631,7 +623,9 @@ namespace DesktopApk
                 MessageBox.Show($"Cannot delete Subject {error.Message}");
             }
         }
+        #endregion
 
+        #region Branch Right Panel Controls
         private void btn_Delete_Branch_Click(object sender, RoutedEventArgs e)
         {
             var selectedTable = dataGridBranch.SelectedIndex;
@@ -722,6 +716,9 @@ namespace DesktopApk
             dataGridBranch.ItemsSource = myBranch;
             
         }
+        #endregion
+
+        #region Class Right Panel Controls
 
         private void btn_Add_Class_Click(object sender, RoutedEventArgs e)
         {
@@ -813,7 +810,9 @@ namespace DesktopApk
             }
             dataGridClass.ItemsSource = myClass;
         }
+        #endregion
 
+        #region Session Right Panel Controls
         private void btn_Delete_Session_Click(object sender, RoutedEventArgs e)
         {
             var selectedTable = dataGridSession.SelectedIndex;
@@ -908,6 +907,9 @@ namespace DesktopApk
             }
             dataGridSession.ItemsSource = mySession;
         }
+        #endregion
+
+        #region Stipend Right Panel Controls
 
         private void btn_Refresh_DataGrid_Stipend(object sender, RoutedEventArgs e)
         {
@@ -1004,12 +1006,15 @@ namespace DesktopApk
             }
             dataGridStipend.ItemsSource = myStipend;
         }
+        #endregion
 
+        #region Grades Right Panel Control
         private void btn_Refresh_DataGrid_Grades(object sender, RoutedEventArgs e)
         {
             loadDataGridGrade();
         }
 
+        
         private void btn_Add_Grades_Click(object sender, RoutedEventArgs e)
         {
             AddNewGrade addNewGrade = new AddNewGrade();
@@ -1100,7 +1105,7 @@ namespace DesktopApk
             }
             dataGridGrades.ItemsSource = myGrades;
         }
+        #endregion
 
-        
     }
 }

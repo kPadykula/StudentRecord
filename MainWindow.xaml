@@ -13,8 +13,12 @@
         <CollectionViewSource x:Key="studentViewSource" Source="{Binding Student, Source={StaticResource databaseSchoolDataSet}}"/>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160*"/>
+            <ColumnDefinition Width="833*"/>
+        </Grid.ColumnDefinitions>
         <!--Main Grid-->
-        <Grid x:Name="RootGrid" Background="#BAFFDF">
+        <Grid x:Name="RootGrid" Background="#BAFFDF" Grid.ColumnSpan="2" Margin="0,0,0.334,-0.333">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
@@ -31,7 +35,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
-                        
+
                     </Grid.ColumnDefinitions>
 
 
@@ -132,6 +136,9 @@
 
                 <!--RIGHT Panel Students-->
                 <Grid x:Name="RightCenterPanelStudents" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -146,13 +153,6 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <ComboBox x:Name="comboBoxSelectBranch" Grid.Column="0" Grid.Row="0"
-                              HorizontalAlignment="Left"
-                              Visibility="Collapsed"
-                              SelectionChanged="comboBoxSelectBranch_SelectionChanged"
-                              Margin="10,10,0,0" 
-                              VerticalAlignment="Top" 
-                              Width="191" Height="30"/>
                     <TextBox  Grid.Column="2" Grid.Row="0"
                               TextChanged="TextBoxSearch_TextChanged"
                               HorizontalAlignment="Center" 
@@ -214,6 +214,9 @@
 
                 <!--RIGHT Panel Lecturers-->
                 <Grid x:Name="RightCenterPanelLecturers" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -249,7 +252,7 @@
                             Margin="10,10,0,0" 
                             VerticalAlignment="Top"
                             Width="191" Height="30"/>
-                    
+
                     <Button x:Name="buttonRefreshLecturers" Content="Refresh" Grid.Column="3" 
                             HorizontalAlignment="Center" 
                             VerticalAlignment="Center" 
@@ -274,6 +277,9 @@
 
                 <!--RIGHT Panel Subjects-->
                 <Grid x:Name="RightCenterPanelSubjects" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -331,6 +337,9 @@
 
                 <!--RIGHT Panel Branch-->
                 <Grid x:Name="RightCenterPanelBranch" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -388,6 +397,9 @@
 
                 <!--RIGHT Panel Class-->
                 <Grid x:Name="RightCenterPanelClass" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -448,6 +460,9 @@
 
                 <!--RIGHT Panel Session-->
                 <Grid x:Name="RightCenterPanelSession" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -511,6 +526,9 @@
 
                 <!--RIGHT Panel Stipend-->
                 <Grid x:Name="RightCenterPanelStipend" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
@@ -568,9 +586,12 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
-                
+
                 <!--RIGHT Panel Grades-->
                 <Grid x:Name="RightCenterPanelGrades" Grid.Column="1" Visibility="Collapsed">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources\booktop.jpg"/>
+                    </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="50"/>
                         <RowDefinition/>
